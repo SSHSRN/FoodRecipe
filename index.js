@@ -23,7 +23,8 @@ bot.command('random', async (ctx) => {
     console.log(recipe.recipes[0].image);
     ctx.replyWithPhoto(recipe.recipes[0].image, {
         caption: recipe.recipes[0].title
-    })
+    });
+    ctx.reply(recipe.recipes[0].instructions);
 });
 
 bot.launch();
