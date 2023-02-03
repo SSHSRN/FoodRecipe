@@ -24,7 +24,10 @@ bot.command('random', async (ctx) => {
     ctx.replyWithPhoto(recipe.recipes[0].image, {
         caption: recipe.recipes[0].title
     });
-    ctx.reply(recipe.recipes[0].instructions);
+    const instructions = recipe.recipes[0].instructions.replace(/<[^>]+>/g, '');
+    // In the above line, we are using a regular expression to remove all the HTML tags from the instructions
+    // /<[^>]+>/g is a regular expression that matches all the HTML tags in the string
+    ctx.reply(instructions);
 });
 
 bot.launch();
