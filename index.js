@@ -21,7 +21,7 @@ bot.command('random', async (ctx) => {
     const recipe = await getRandomRecipe();
     console.log(recipe);
     console.log(recipe.recipes[0].image);
-    ctx.replyWithPhoto(recipe.recipes[0].image, {
+    await ctx.replyWithPhoto(recipe.recipes[0].image, {
         caption: recipe.recipes[0].title
     });
     const instructions = recipe.recipes[0].instructions.replace(/<[^>]+>/g, '');
