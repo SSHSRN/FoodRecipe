@@ -5,6 +5,7 @@ require('dotenv').config();
 const bot = new Telegraf(process.env.telegram_bot_api_key);
 const apiRandomURL = process.env.recipe_api_url;
 const apiTagsURL = process.env.recipe_api_tags_url;
+const apiFoodJokeURL = process.env.food_joke_api_url;
 
 const getRandomRecipe = async () => {
     // add http headers to the request
@@ -14,6 +15,16 @@ const getRandomRecipe = async () => {
     // make the request
     const response = await axios.get(apiRandomURL, { headers });
     return response.data;
+}
+
+const getFoodJoke = async () => {
+    // add http headers to the request
+    const headers = {
+        'x-api-key': process.env.recipe_api_key
+    };
+    // make the request
+    const response = await axios.get(apiFoodJokeURL, { headers });
+    return response.data.text;
 }
 
 const getRecipeByTags = async (tags) => {
@@ -57,4 +68,10 @@ bot.command('tags', async (ctx) => {
     await ctx.reply(instructions);
 });
 
+bot.command('joke', async (ctx) => {
+    const joke = await getFoodJoke();
+    await ctx.reply(joke);
+});
+
+// Launch the bot
 bot.launch();
