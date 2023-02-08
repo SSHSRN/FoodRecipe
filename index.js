@@ -73,5 +73,9 @@ bot.command('joke', async (ctx) => {
     await ctx.reply(joke);
 });
 
+bot.command('help', (ctx) => {
+    ctx.reply(`I can help you with the following commands: \n\n/random - to get a random food recipe \n/tags - to get a recipe by tags (separated by whitespaces) \n/joke - to get a random food joke \n/help - to get this message😂`);
+});
+
 // Launch the bot
 bot.launch();
